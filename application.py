@@ -1,0 +1,23 @@
+from web3 import Web3, IPCProvider
+from flask import Flask
+from flask_wtf.csrf import CSRFProtect
+from os.path import abspath, dirname
+import os
+
+basedir = abspath(dirname(__file__))
+
+debug = (os.environ.get('FLASK_DEBUG', '0') == '1')
+stage = (os.environ.get('FLASK_STAGE', '0') == '1')
+
+app = Flask(__name__)
+app.web3 = Web3(IPCProvider("./chain/geth.ipc"))
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'development_key')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+from browser import make_browser_blueprint
+
+csrf = CSRFProtect(app)
+
+app.register_blueprint(make_browser_blueprint(app))
+
+application = app

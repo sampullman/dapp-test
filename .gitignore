@@ -1,0 +1,16 @@
+
+chain/
+contract_samples/
+
+db_backups/
+*.zip
+
+.DS_Store
+
+log
+.vscode/
+__pycache__
+*.pyc
+*~
+
+.env
