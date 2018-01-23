@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, redirect, request, url_for, abort
 
 import json
 
+from response_util import single_error as error
+
 def make_browser_blueprint(app):
 
     blueprint = Blueprint('browser', __name__, static_folder='static',
@@ -21,19 +23,22 @@ def make_browser_blueprint(app):
                 tx_count = app.web3.eth.getTransactionCount(account_id)
                 return json.dumps({"id": account_id, "balance": balance, "tx_count": tx_count})
             except ValueError as ve:
-                return json.dumps({"errors": ["Invalid account address."]})
+                return error("Invalid account address.")
             except Exception as e:
-                return json.dumps({"errors": ["Unknown error accessing account."]})
+                return error("Unknown error accessing account.")
         else:
-            return json.dumps({"errors": ["Account id required."]})
+            return error("Account id required.")
 
     @blueprint.route("/api/transaction/", methods=['POST'])
     def api_transaction():
         tx_id = validate_id(request.form.get("id"))
         if tx_id:
             try:
-                tx = dict(app.web3.eth.getTransaction(tx_id))
-                print(dir(tx))
+                tx = app.web3.eth.getTransaction(tx_id)
+                if not tx:
+                    return error("Invalid transaction, make sure the address is correct.")
+                tx = dict(tx)
+
                 tx_receipt = dict(app.web3.eth.getTransactionReceipt(tx_id))
                 if tx_receipt:
                     tx['txReceipt'] = True
@@ -41,12 +46,13 @@ def make_browser_blueprint(app):
                     tx['cumulativeGasUsed'] = tx_receipt['cumulativeGasUsed']
                 return json.dumps({**tx, **tx_receipt})
             except ValueError as ve:
-                return json.dumps({"errors": ["Invalid transaction address."]})
+                return error("Invalid transaction address.")
             except Exception as e:
                 print("EXCEPTION: "+str(e))
-                return json.dumps({"errors": ["Unknown error."]})
+                print(e)
+                return error("Unknown error.")
         else:
-            return json.dumps({"errors": ["Transaction id required."]})
+            return error("Transaction id required.")
 
     return blueprint
 

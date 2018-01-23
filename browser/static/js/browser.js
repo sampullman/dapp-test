@@ -33,8 +33,10 @@ function accountDisplay(info) {
 }
 
 function transactionDisplay(info) {
+    var to = (info.to === null) ? "New Contract" : info.to;
+
     var display = $('<table>').append(row("Block", "#"+info.blockNumber+" "+info.blockHash))
-        .append(row("From", info.from)).append(row("To", info.to)).append(row("Value", etherRadio(info.value)))
+        .append(row("From", info.from)).append(row("To", to)).append(row("Value", etherRadio(info.value)))
         .append(row("Max gas", info.gas)).append(row("Gas price", info.gasPrice));
     if(info.txReceipt) {
         display.append(row("Gas used", info.gasUsed));       
@@ -63,7 +65,7 @@ function readFail(form) {
         console.log(jqXHR);
         console.log(textStatus);
         console.log(errorThrown);
-        if(jqXHR.indexOf("The CSRF token has expired") !== -1) {
+        if(jqXHR.responseText.indexOf("The CSRF token has expired") !== -1) {
 
             form.parent().find(".read_result").html("Session timed out, reload the page.");
         } else {
