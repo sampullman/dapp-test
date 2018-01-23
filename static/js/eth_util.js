@@ -24,16 +24,20 @@ function row(title, value) {
                     .append($('<td class="disp_value"></td>').append(value));
 }
 
+function showError(form, error) {
+    form.parent().find(".read_result").html(error);
+}
+
 function readSuccess(form, displayFn) {
     return function(response) {
         console.log("Success");
         console.log(response);
 
         var data = JSON.parse(response);
-        var resultDiv = form.parent().find(".read_result");
         if("errors" in data) {
-            resultDiv.html(data.errors[0]);
+            showError(form, data.errors[0]);
         } else {
+            var resultDiv = form.parent().find(".read_result");
             resultDiv.html("");
             resultDiv.append(displayFn(data));
         }
@@ -47,9 +51,9 @@ function readFail(form) {
         console.log(errorThrown);
         if(jqXHR.responseText.indexOf("The CSRF token has expired") !== -1) {
 
-            form.parent().find(".read_result").html("Session timed out, reload the page.");
+            showError(form, "Session timed out, reload the page.");
         } else {
-            form.parent().find(".read_result").html("Server error");
+            showError(form, "Server error");
         }
     }
 }
@@ -61,4 +65,11 @@ function make_form(form_id, displayFn) {
         $.post(form.attr("action"), form.serialize())
             .done(readSuccess(form, displayFn)).fail(readFail(form));      
     });
+}
+
+function strip_hex(hex_str) {
+    if(hex_str.startsWith('0x')) {
+        hex_str = hex_str.substring(2, hex_str.length);
+    }
+    return hex_str;
 }

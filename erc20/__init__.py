@@ -5,7 +5,7 @@ import json
 from response_util import single_error as error
 from eth_util import validate_id
 
-CONTRACT_ID = '0x35fEf0cB7B656174a1882c95443Aa1e3525d898A'
+CONTRACT_ID = '0x16dF1321541Db03Fc2f1AA071ae8f73F1180b774'
 
 def make_erc20_blueprint(app):
 
@@ -28,7 +28,7 @@ def make_erc20_blueprint(app):
                 print(key_str)
                 index = app.web3.sha3(hexstr=key_str)
                 balance = int(app.web3.eth.getStorageAt(CONTRACT_ID, int(index, 16)), 16)
-                #int(w.eth.getStorageAt(contract, int(newKey, 16)), 16)
+
                 return json.dumps({"id": account_id, "balance": balance})
             except ValueError as ve:
                 print(ve)
@@ -41,10 +41,16 @@ def make_erc20_blueprint(app):
 
     @blueprint.route("/api/erc20/send/", methods=['POST'])
     def api_send():
-        tx_data = validate_id(request.form.get("transaction_data"))
+        tx_data = validate_id(request.form.get("tx_data"))
+        print(request.form.get("tx_data"))
         if tx_data:
-            return error("Not implemented.")
+            try:
+                tx_id = app.web3.eth.sendRawTransaction(tx_data)
+                return json.dumps({"tx_id": tx_id})
+            except ValueError as e:
+                print(e.args)
+                return error('Error: {}'.format(e.args[0]['message']))
         else:
-            return error("Transaction id required.")
+            return error("Malformed transaction, check private key.")
 
     return blueprint
