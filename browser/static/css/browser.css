@@ -34,16 +34,23 @@ body {
     background-color: white;
 }
 
+form {
+    position: relative;
+    height: 34px;
+}
+
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 input {
     border: 1px solid #ABABAB;
-    height: 30px;
+    height: 100%;
     padding-left: 6px;
     font-size: 13px;
     outline: none;
+    box-sizing: border-box;
+    float: left;
 }
 
 input:focus, textarea:focus {
@@ -53,6 +60,18 @@ input:focus, textarea:focus {
 textarea {
     outline: none;
     border: 1px solid #999999;
+}
+
+.go {
+    width: 48px;
+    height: 100%;
+    font-size: 1.1em;
+    color: white;
+    background: none;
+    background-color: #01B3CA;
+    outline: none;
+    border: none;
+    float: left;
 }
 
 .eth_convert {
