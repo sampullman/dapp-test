@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/bignumber.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/eth_util.js') }}"></script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+        console.log("Token: "+csrf_token);
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        });
+    </script>
+    <div id="top_bar">
+        <div class="top_link"><a href="erc20/">COIN</a></div>
+        {% block topbar %}{% endblock topbar %}
+    </div>
+
+    <div id="content">
+        {% block body %}{% endblock body %}
+    </div>
+</body>
+</html>

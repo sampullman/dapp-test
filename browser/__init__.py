@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, redirect, request, url_for, abort
 import json
 
 from response_util import single_error as error
+from eth_util import validate_id
 
 def make_browser_blueprint(app):
 
@@ -55,11 +56,3 @@ def make_browser_blueprint(app):
             return error("Transaction id required.")
 
     return blueprint
-
-def validate_id(hash):
-    if hash:
-        if not hash.startswith("0x"):
-            hash = "0x{}".format(hash)
-        return hash
-    else:
-        return False

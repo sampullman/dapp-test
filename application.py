@@ -15,9 +15,11 @@ app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'development_key')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 from browser import make_browser_blueprint
+from erc20 import make_erc20_blueprint
 
 csrf = CSRFProtect(app)
 
 app.register_blueprint(make_browser_blueprint(app))
+app.register_blueprint(make_erc20_blueprint(app), url_prefix="/erc20")
 
 application = app
