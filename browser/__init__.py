@@ -22,10 +22,14 @@ def make_browser_blueprint(app):
             try:
                 balance = app.web3.eth.getBalance(account_id)
                 tx_count = app.web3.eth.getTransactionCount(account_id)
-                return json.dumps({"id": account_id, "balance": balance, "tx_count": tx_count})
+                print(app.web3.txpool.status)
+                tx_pending = int(app.web3.txpool.status.pending, 16)
+                return json.dumps({"id": account_id, "balance": balance, "tx_count": tx_count,
+                                    "tx_pending": tx_pending})
             except ValueError as ve:
                 return error("Invalid account address.")
             except Exception as e:
+                print(e)
                 return error("Unknown error accessing account.")
         else:
             return error("Account id required.")

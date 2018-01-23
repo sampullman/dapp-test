@@ -42,11 +42,12 @@ function makeTransaction(sender, sender_key, receiver, nonce, amount) {
 }
 
 function sendTransaction(info) {
+    console.log(info);
     form = $("#send");
     var sender = $("[name=id]").val();
     var sender_key = $("[name=key]").val();
     var receiver = $("[name=receiver]").val();
-    var nonce = info.tx_count;
+    var nonce = info.tx_count + info.tx_pending;
     var amount = parseInt($("[name=amount]").val());
     
     if(sender_key.length == 0) {
