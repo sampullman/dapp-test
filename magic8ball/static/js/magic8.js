@@ -147,6 +147,9 @@ $(document).ready(function() {
     $(".event").click(function() {
         var question = $(this).find(".history_question span").text();
         $("#question input").val(question);
+        $(this).notify("Copied!", { showAnimation: 'fadeIn', hideAnimation: 'fadeOut', position:"left", 
+                                    autoHideDelay: 1200, style: 'bootstrap' });
+        copyToClipboard($("#question input"));
     });
 
     $("#question").submit(function(event) {
