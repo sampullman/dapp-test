@@ -14,6 +14,7 @@
 {% block body %}
 <script>
     var podoTestInfo = {{ podoTestInfo|safe }};
+    var events = {{ events|safe }};
 </script>
 <div id="left">
     <div id="title">Magic 8 Ball</div>
@@ -27,24 +28,7 @@
     <div class="read_result"></div>
 </div>
 <div id="right">
-    <div id="events">
-    History
-    {% for event in events %}
-        <div class="event">
-            <div class="icon {{ event['data']['status'] }}"></div>
-            <div class="info">
-                <div class="question">Q: {{ event["data"]["question"] }}</div>
-                
-                <div class="answer">
-                    {% if event["data"]["answer"] %}
-                        A: {{ event["data"]["answer"] }}
-                    {% else %}
-                        We may never know!
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
+    <div id="history_title">History</div>
+    <div id="events"></div>
 </div>
 {% endblock body %}

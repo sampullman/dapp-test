@@ -16,6 +16,13 @@
     float: left;
     width: 30%;
     height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+#right>div {
+    box-sizing: border-box;
+    padding-right: 24px;
 }
 
 #title {
@@ -117,23 +124,40 @@ form {
     margin: 0 auto;
 }
 
-.event:first-of-type {
-    border-bottom: none;
+#answer {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 2em;
+}
+
+#history_title {
+    font-weight: bold;
 }
 
 #events {
     height: 100%;
     width: 100%;
-    box-sizing: border-box;
-    padding-right: 24px;
+    overflow: scroll;
+}
+
+#events .first {
+    border-top: 1px solid #777;
+    margin-top: 8px;
 }
 
 .event {
     box-sizing: border-box;
     padding: 8px 0 6px 12px;
     border: 1px solid #777;
+    border-top: none;
     width: 100%;
     height: 62px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.event:hover {
+    background-color: #F2F2F2;
 }
 
 .event .icon {

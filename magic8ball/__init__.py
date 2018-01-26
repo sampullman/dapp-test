@@ -94,7 +94,7 @@ def make_magic8_blueprint(app):
         events = get_events(app.db)
         print(events)
         print(PODO_TEST_INFO)
-        return render_template("magic8.html", events=events,
+        return render_template("magic8.html", events=json.dumps(events),
             podoTestInfo=json.dumps(PODO_TEST_INFO))
     
     
@@ -134,7 +134,7 @@ def make_magic8_blueprint(app):
         if tx_hash:
             entry = app.db.session.query(Magic8Event).filter_by(event_id=tx_hash).order_by(Magic8Event.id.desc()).first()
             if entry:
-                events = [event.to_web() for event in Magic8Event.query.all()]
+                events = get_events(app.db)
                 return json.dumps({"pending": False, "result": entry.to_web(), "events": events})
             else:
                 return json.dumps({"pending": True})

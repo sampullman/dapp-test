@@ -10,6 +10,24 @@ var pending = false;
 
 var testCallback = function(error, result) { console.log(error+" "+result);};
 
+// TOOD get nth-child css working properly instead of 'first' hack
+function makeEvent(event, first) {
+    var answer = (event.data.answer == "") ? "We may never know!" : event.data.answer;
+    return '<div class="event'+(first?" first":"")+'">'+
+            '<div class="icon '+event.data.status+'"></div>'+
+            '<div class="info">'+
+                '<div class="history_question">Q: <span>'+event.data.question+'</span></div>'+
+                '<div class="history_answer">A: '+answer+'</div></div></div>';
+}
+
+function refreshEvents(events) {
+    window.events = events;
+    $("#events").html('');
+    for(var i=0; i<events.length; i+=1) {
+        $("#events").append($(makeEvent(events[i], i==0)));
+    }
+}
+
 function questionDisplay(info) {
     console.log(info);
     return $('<table>').append(row("Question sent", info.answer));
@@ -24,7 +42,7 @@ function confirmNewQuestion(callback) {
 
 function askQuestion(account, question, tithe) {
     console.log(""+tithe+" Asking "+question+" for "+account)
-    $(".read_result").text("Asking the Magic 8 ball...");
+    $(".read_result").text("Preparing the question...");
     contract.askQuestion(question, {
         gas: 120000,
         from: account,
@@ -41,6 +59,7 @@ function askQuestion(account, question, tithe) {
 
 function questionAsked(tx_hash) {
     pending = true;
+    $("#ball div").addClass("spin");
     $(".read_result").text("The Magic 8 Ball is thinking...");
     questionTime = Date.now();
     questionHash = tx_hash;
@@ -61,9 +80,11 @@ function checkAnswer() {
 
             } else if(data.result.data.status != "success") {
                 showResult('Magic 8 Ball rejected your question!\nTry again with higher gas price or ether value.');
-
+                
             } else {
-                showResult('Magic 8 Ball says: "'+data.result.data.answer+'"');
+                console.log(data.result);
+                showResult('Magic 8 Ball says:<br /><span id="answer">'+data.result.data.answer+'</span>');
+                refreshEvents(data.events);
             }
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
@@ -73,11 +94,14 @@ function checkAnswer() {
 
 function showResult(text) {
     pending = false;
-    $(".read_result").text(text);
+    $("#ball div").removeClass("spin");
+    console.log(text);
+    $(".read_result").html(text);
 }
 
 $(document).ready(function() {
     vex.defaultOptions.className = 'vex-theme-wireframe';
+    refreshEvents(events);
 
     w3 = getWeb3js();
     ContractDef = web3.eth.contract(ContractABI);
@@ -119,6 +143,11 @@ $(document).ready(function() {
             $("#ball_inner").removeClass("rotate");
         }
     );
+
+    $(".event").click(function() {
+        var question = $(this).find(".history_question span").text();
+        $("#question input").val(question);
+    });
 
     $("#question").submit(function(event) {
         console.log("Questioning..."+contract+" "+w3.eth.accounts.length);
