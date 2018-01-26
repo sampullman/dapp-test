@@ -5,6 +5,7 @@ import os
 
 class BaseConfig(object):
     DO_DB = True
+    VENV = '/home/podolabs/.virtualenvs/dapp/bin/activate'
     FOLDER = '/home/podolabs/dapp-test'
 
 class StageConfig(BaseConfig):
@@ -16,7 +17,7 @@ class StageConfig(BaseConfig):
 class ProdConfig(BaseConfig):
     HOST = os.environ.get('PROD_HOST', None)
     PASSWORD = os.environ.get('PROD_PASSWORD', None)
-    FOLDER = '/home/podolabs/site/kickstarter-app'
+    FOLDER = '/home/podolabs/site/dapp-test'
     BACKUP = True
     DB = "app.sqlite3"
 
@@ -32,6 +33,8 @@ def deploy(config):
 
     with cd(config.FOLDER):
         local('rsync -az --force --delete --progress --exclude-from=rsync_exclude.txt -e "ssh -p22" ./ {}:{}'.format(config.HOST, config.FOLDER))
+        run('rm '+config.DB)
+        run('source '+config.VENV+' && python maintain.py')
         sudo('service dapp-test restart')
 
 def setup(host, password):

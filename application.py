@@ -15,7 +15,7 @@ app.web3 = Web3(IPCProvider("./chain/geth.ipc"))
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'development_key')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-if debug:
+if debug or stage:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.sqlite3'
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.sqlite3'
