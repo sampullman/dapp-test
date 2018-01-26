@@ -73,3 +73,13 @@ function strip_hex(hex_str) {
     }
     return hex_str;
 }
+
+function getWeb3js() {
+    if (typeof web3 !== 'undefined') {
+        // Use Mist/MetaMask's provider
+        return new Web3(web3.currentProvider);
+        console.log("Using metamask");
+    } else {
+        return new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    }
+}

@@ -2,11 +2,12 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('erc20.static', filename='css/erc20.css') }}" />
-    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/web3.min.js') }}"></script>
+    <!--<script type="text/javascript" src="{{ url_for('static', filename='js/lib/web3.min.js') }}"></script>-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/ethereumjs-tx-1.3.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('erc20.static', filename='js/erc20.js') }}"></script>
 {% endblock head %}
 
+{% block topbar %}<div id="network">No network</div>{% endblock topbar %}
 
 {% block body %}
 <div class="query_block">

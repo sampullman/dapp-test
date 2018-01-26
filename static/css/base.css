@@ -17,7 +17,6 @@ html {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 400;
-    line-height: 20px;
 }
 
 body {
@@ -39,6 +38,9 @@ body {
 
 .top_link {
     width: 60px;
+    position: relative;
+    float: left;
+    margin-left: 2px;
 }
 
 .top_link a {
@@ -51,6 +53,13 @@ body {
 
 .top_link a:hover {
     background-color: #333;
+}
+
+#network {
+    position: absolute;
+    padding: 6px 8px 0 0;
+    right: 0;
+    top: 0;
 }
 
 #content {
@@ -97,6 +106,7 @@ textarea {
     outline: none;
     border: none;
     float: left;
+    cursor: pointer;
 }
 
 .eth_convert {

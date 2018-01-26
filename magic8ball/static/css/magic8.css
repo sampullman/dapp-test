@@ -1,0 +1,169 @@
+
+#content {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#left {
+    position: relative;
+    float: left;
+    width: 70%;
+}
+
+#right {
+    position: relative;
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+#title {
+    margin-top: 22px;
+    font-size: 2.4em;
+    font-weight: bold;
+}
+
+#subtitle {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+#ball {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+}
+
+#ball div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: contain;
+}
+
+#ball div.spin {
+    animation-duration: 2200ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#ball_outer {
+    background-image: url(/magic8ball/static/img/ball_outer.png);
+}
+
+#ball_outer.spin {
+    animation-name: spin1;
+}
+
+@keyframes spin1 {
+    from {
+        transform:rotateY(0deg);
+    }
+    to {
+        transform:rotateY(180deg);
+    }
+}
+
+#ball_inner {
+    background-image: url(/magic8ball/static/img/ball_inner.png);
+}
+
+#ball_inner.rotate {
+    animation-name: spin2;
+    animation-duration: 600ms;
+    animation-iteration-count: initial;
+    animation-timing-function: linear;
+}
+
+@keyframes spin2 {
+    from {
+        transform:rotateZ(0deg);
+    }
+    to {
+        transform:rotateZ(360deg);
+    }
+}
+
+#ball_inner.spin {
+    animation-name: spin1;
+}
+
+.query_title {
+    margin-top: 36px;
+}
+
+form {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.go {
+    width: 64px;
+    float: unset;
+    margin-top: 10px
+}
+
+.read_result {
+    margin-top: 8px;
+}
+
+.read_result table {
+    margin: 0 auto;
+}
+
+.event:first-of-type {
+    border-bottom: none;
+}
+
+#events {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 24px;
+}
+
+.event {
+    box-sizing: border-box;
+    padding: 8px 0 6px 12px;
+    border: 1px solid #777;
+    width: 100%;
+    height: 62px;
+}
+
+.event .icon {
+    width: 34px;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    float: left;
+}
+
+.event .info {
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+    padding-left: 18px;
+    text-align: left;
+    height: 100%;
+}
+
+.event .icon.success {
+    background-image:  url(/magic8ball/static/img/success.png);
+}
+
+.event .icon.fail {
+    background-image:  url(/magic8ball/static/img/fail.png);
+}
+
+.event .info div {
+    width: 100%;
+    height: 50%;
+}

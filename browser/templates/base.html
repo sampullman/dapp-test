@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}" />
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery-3.2.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/bignumber.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/web3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/eth_util.js') }}"></script>
     {% block head %}{% endblock %}
 </head>
@@ -25,6 +26,7 @@
     </script>
     <div id="top_bar">
         <div class="top_link"><a href="erc20/">COIN</a></div>
+        <div class="top_link"><a href="magic8ball/">8 Ball</a></div>
         {% block topbar %}{% endblock topbar %}
     </div>
 

@@ -25,3 +25,4 @@ web3==3.16.4
 Werkzeug==0.14.1
 WTForms==2.1
 uWSGI==2.0.15
+Flask-SQLAlchemy==2.3.2
