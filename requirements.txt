@@ -21,7 +21,7 @@ rlp==0.6.0
 semantic-version==2.6.0
 toolz==0.9.0
 urllib3==1.22
-web3==3.16.4
+web3==4.0.0b6
 Werkzeug==0.14.1
 WTForms==2.1
 uWSGI==2.0.15
