@@ -37,18 +37,24 @@ body {
 }
 
 .top_link {
-    width: 60px;
     position: relative;
     float: left;
+    font-size: 12px;
     margin-left: 2px;
 }
 
 .top_link a {
-    width: 100%;
+    width: 76px;
+    height: 22px;
     padding: 6px 0;
-    display: inline-block;
+    display: table-cell;
+    vertical-align: middle;
     color: white;
     background-color: #000;
+}
+
+.top_link.active a {
+    background-color: #333;
 }
 
 .top_link a:hover {

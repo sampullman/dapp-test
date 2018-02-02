@@ -27,8 +27,12 @@
         });
     </script>
     <div id="top_bar">
-        <div class="top_link"><a href="/erc20/">COIN</a></div>
-        <div class="top_link"><a href="/magic8ball/">8 Ball</a></div>
+        <div class="top_link {% block top_link_erc20 %}{% endblock %}">
+            <a href="/">Token</a></div>
+        <div class="top_link {% block top_link_8ball %}{% endblock %}">
+            <a href="/magic8ball/">8 Ball</a></div>
+        <div class="top_link {% block top_link_tutorial %}{% endblock %}">
+            <a href="/getting_started/">How to Buy</a></div>
         {% block topbar %}{% endblock topbar %}
     </div>
 

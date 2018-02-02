@@ -12,8 +12,11 @@ def make_browser_blueprint(app):
 
     @blueprint.route("/")
     def browser():
-        #app.logger.info("Load Browser")
         return render_template("browser.html")
+
+    @blueprint.route("/getting_started/")
+    def buying_tokens():
+        return render_template("tutorial.html")
 
     @blueprint.route("/api/account/", methods=['POST'])
     def api_account():

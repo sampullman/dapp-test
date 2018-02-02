@@ -33,6 +33,7 @@ def deploy(config):
 
     with cd(config.FOLDER):
         local('rsync -az --force --delete --progress --exclude-from=rsync_exclude.txt -e "ssh -p22" ./ {}:{}'.format(config.HOST, config.FOLDER))
+        run('mkdir '+os.path.join(basedir, 'flask_cache'))
         run('rm '+config.DB)
         run('source '+config.VENV+' && python maintain.py')
         sudo('service dapp-test restart')

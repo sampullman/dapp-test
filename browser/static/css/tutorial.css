@@ -1,0 +1,156 @@
+
+:target:before {
+    content: "";
+    display: block;
+    height: 30px;
+    margin: -30px 0 0;
+}
+
+#content {
+    width: 800px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+a {
+    color: #2299DD;
+}
+
+#top_bar {
+    background-color: white;
+}
+
+#subtitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.text {
+    font-size: 18px;
+    line-height: 160%;
+    color: #222;
+}
+
+p {
+    text-indent: 24px;
+}
+
+.section {
+    margin-top: 24px;
+}
+
+#table_of_contents {
+    margin-top: 12px;
+    line-height: 180%;
+}
+
+#table_of_contents a {
+    color: #555;
+    text-decoration: underline;
+}
+
+#metamask_links > * {
+    display: none;
+}
+
+#wallet_options {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 32px;
+}
+
+#wallet_options li {
+    float: left;
+    cursor: pointer;
+    user-select: none;
+    background-color: #333333;
+    color: white;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border-left: 1px solid white;
+}
+
+#wallet_options li:first-child {
+    border-top-left-radius: 5px;
+    border-left: none;
+}
+
+#wallet_options li:last-child {
+    border-top-right-radius: 5px;
+}
+
+#wallet_options li:hover, #wallet_options li.active_link {
+    background-color: #555;
+}
+
+#install_tutorials {
+    background-color: #d3d3d3;
+    box-sizing: border-box;
+    padding: 5px 8px 16px 24px;
+    min-height: 300px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#install_tutorials .text {
+    font-size: 16px;
+}
+
+#install_tutorials .tutorial {
+    display: none;
+}
+
+#install_tutorials #metamask {
+    display: block;
+}
+
+#troubleshooting {
+    margin-bottom: 50px;
+}
+
+#troubleshooting p {
+    text-indent: 0;
+    padding-left: 28px;
+}
+
+.question_wrap {
+    margin-top: 64px;
+}
+
+.question_wrap:first-child {
+    margin-top: 40px;
+}
+
+.question {
+    color: black;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.symbol {
+    display: block;
+    position: relative;
+    float: left;
+    bottom: 2px;
+    width: 26px;
+}
+
+.answer {
+    display: none;
+}
+
+.answer p:first-child {
+    margin-top: 30px;
+}
+
+.answer p:last-child {
+    margin-bottom: 0;
+}

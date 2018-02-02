@@ -2,6 +2,8 @@
 chain/
 contract_samples/
 
+resources/
+flask_cache/
 db_backups/
 *.zip
 

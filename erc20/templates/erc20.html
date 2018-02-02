@@ -7,10 +7,14 @@
     <script type="text/javascript" src="{{ url_for('erc20.static', filename='js/erc20.js') }}"></script>
 {% endblock head %}
 
+{% block top_link_erc20 %}active{% endblock %}
 {% block topbar %}<div id="network">No network</div>{% endblock topbar %}
 
 {% block body %}
 <div class="query_block">
+    {% if eth_value %}
+        <div id="token_price">Current token price: {{ eth_value / 1000 }}</div>
+    {% endif %}
     <div class="query_title">Check Balance</div>
     <form id="balance" action="{{ url_for('.api_balance') }}" method="POST">
         <input type="text" name="id" size="60" placeholder="Your public key" value="0x15581c92DB672cC9316846aEF34DC46Ac95378c2" />

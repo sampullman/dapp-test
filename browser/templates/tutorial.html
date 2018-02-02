@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('browser.static', filename='css/tutorial.css') }}" />
+    <script type="text/javascript" src="{{ url_for('browser.static', filename='js/tutorial.js') }}"></script>
+{% endblock head %}
+
+{% block top_link_tutorial %}active{% endblock %}
+
+{% block body %}
+<h1 id="title">How to Buy Tokens</h1>
+<div id="subtitle">
+    This article will teach you how to buy <a href="/">ERC20 tokens</a> on the Ethereum platform
+</div>
+
+<div class="text">
+    There are several ways to purchase crowdsale tokens (and interact with the <a href="">Ethereum blockchain.</a>).
+    Unfortunately it is no longer possible to do so on exchanges, but many of the alternatives below are more secure
+    and just as easy. Scroll down to review the different methods, or choose one from the list:<br />
+
+    <div id="table_of_contents">
+    <a href="#step1">Step 1: Install a Token Wallet</a><br />
+    <a href="#step2">Step 2: Purchase 'ether' from an exchange</a><br />
+    <a href="#step3">Step 3: Transfer ether to your new wallet</a><br />
+    <a href="#step4">Step 4: Purchase tokens</a><br />
+    <a href="#troubleshooting">Troubleshooting</a>
+    </div>
+</div>
+
+<div id="step1" class="text section">
+    <h2>Step 1: Install a token wallet</h2>
+    <p>
+    You <i>must not</i> attempt to purchase tokens with an exchange wallet!
+    At this time exchanges do not support the Ethereum ERC20 tokens, so there is no way
+    to trade or use coins purchased with an exchange account. You need to transfer your funds to
+    a private wallet first.
+    <p>
+    We present four options below for generating your own personal wallet. Metamask is simplest and
+    most recommended method.
+    </p>
+</div>
+
+<ul id="wallet_options">
+    <li id="metamask_link" class="active_link">Metamask</li>
+    <li id="mist_link">Mist</li>
+    <li id="parity_link">Parity</li>
+    <li id="myetherwallet_link">MyEtherWallet</li>
+</ul>
+<div id="install_tutorials">
+
+    <div id="metamask" class="text active tutorial">
+        <h3>Metamask Browser Plugin</h3>
+        <p>
+        Metamask is a browser plugin that enables websites to propose Ethereum transactions on your behalf.
+        Once you confirm the transaction, it is submitted directly to the blockchain.
+        </p>
+        <p>
+        Metamask works best with Google Chrome, but they also provide versions for Firefox and Opera.
+        </p>
+        <div id="metamask_links">
+            <a id="mm_chrome" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">Download Chrome Plugin</a><br />
+            <a id="mm_firefox" href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">Download Firefox Plugin</a><br />
+            <a id="mm_opera" href="https://addons.opera.com/en/extensions/details/metamask/">Download Opera Plugin</a>
+            <p id="mm_alt">
+                We notice you aren't using a Metamask compatible browser. We recommend downloading
+                <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>
+                then installing Metamask <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">here</a>.
+            </p>
+        </div>
+    </div>
+    
+    <div id="myetherwallet" class="text tutorial">
+        <h3>MyEtherWallet</h3>
+        <p>
+        MyEtherWallet is a website that lets you easily create private Ethereum wallets. Since they allow exporting
+        private keys, you fully own the wallet and can easily manage tokens. This method is slightly simpler than Metamask
+        but far less secure. If MyEtherWallet is compromised or you visit a scam site (always double check the url), your
+        wallet funds can be irreversibly stolen.
+        </p>
+        <p>
+        That being said, MyEtherWallet is still a good way to manage your wallet if used properly. Visit
+        <a target="_blank" href="https://www.myetherwallet.com/">MyEtherWallet.com</a> to create a new wallet.
+        </p>
+    </div>
+
+    <div id="mist" class="text tutorial">
+        <h3>Mist Wallet</h3>
+        <p>
+        Mist is a desktop app that provides an Ethereum wallet and other Ethereum related functionality.
+        Mist can be downloaded <a target="_blank" href="">here</a>, run the file to install.
+        </p>
+        <p>
+        Mist runs an Ethereum node on your computer that connects to other nodes in the Ethereum network.
+        It receives new blocks that have been mined on the network, and verifies them using the entire history
+        of the blockchain. Therefore it uses <b>a lot of disk space</b> (tens of GB), so only run Mist if you have more
+        than enough available.
+        </p>
+    </div>
+    
+    <div id="parity" class="text tutorial">
+        <h3>Parity</h3>
+        <p>
+        Parity is an Ethereum client that runs in the browser, but must be downloaded locally. It comes with an
+        advanced wallet manager and many other interesting features. Parity can be downloaded <a target="_blank" href="https://www.parity.io/">here</a>,
+        install it how you would any program (just open it).
+        </p>
+        <p>
+        Parity is similar to Mist in that it takes a lot of disk space, since it is running a light version of a
+        full Ethereum node. It has features for advanced users and developers, so we only recommend it if
+        you plan to use more then just the wallet feature.
+        </p>
+    </div>
+
+</div>
+
+<div id="step2" class="text section">
+    <h2>Step 2: Purchase 'ether' from an exchange</h2>
+    <p>
+    Your new wallet will start out with 0 <b>ether</b> (Ethereum's unit of currency).
+    Before purchasing crowdsale tokens you need to get some ether from an exchange.
+    If you already have an account with an exchange that supports Ethereum, you can skip to
+    <a href="#step3">Step 3</a>.
+    </p>
+    <p>
+    An easy and safe way to buy Ethereum is through Coinbase. You can check whether it is
+    available in your country <a target="_blank" href="https://www.coinbase.com/global">here</a>,
+    and sign up for an account <a target="_blank" href="https://www.coinbase.com/signup">here</a>.
+    Once you create and verify an account, add a payment method such as credit card or direct bank
+    transfer.
+    </p>
+    <p>
+    Note that while it is usually fast to verify accounts from major banks, it may take 3-5
+    business days for Coinbase to receive transfers. Credit and debit card transfers are instant but
+    incur a higher <b>fee</b> (1.49% for bank, 3.99% for debit/credit). Your bank may also charge an extra fee for
+    credit card transactions. You can learn more about Coinbase fees
+    <a target="_blank" href="https://support.coinbase.com/customer/en/portal/articles/2109597-coinbase-pricing-fees-disclosures">here</a>.
+    </p>
+    <p>
+    If Coinbase is not available in your country we recommend you research which exchange is best for you. There
+    are many options, you can find a list sorted by volume <a target="_blank" href="https://cryptocoincharts.info/markets/info">here</a>.
+    </p>
+    <p>
+    Once you have an exchange account with a verified payment method, simply follow their instructions to buy ether!
+    You can use the calculator on our <a href="/">token page</a> to figure out how much ether you need.
+    </p>
+</div>
+
+<div id="step3" class="text section">
+    <h2>Step 3: Transfer ether to your new wallet</h2>
+    <p>
+    If you purchased ether on Coinbase, log in to your account and click the <b>Accounts</b> tab. Find your
+    <b>ETH Wallet</b> on the left and click <b>Send</b>. Enter the address of your private wallet created in Step 1,
+    enter the amount you wish to transfer, and confirm the transaction. After a few minutes the transaction should
+    be confirmed by the blockchain and the ether will be available in your private wallet.
+    </p>
+    <p>
+    If you purchased ether on a different exchange, follow their instructions for sending ether.
+    </p>
+</div>
+
+<div id="step3" class="text section">
+    <h2>Step 4: Purchase tokens</h2>
+    <p>
+    </p>
+</div>
+
+<div id="troubleshooting" class="text section">
+    <h2>Troubleshooting</h2>
+    <div class="question_wrap">
+        <div class="question"><span class="symbol">+</span> 
+            I transferred ether from Coinbase to Metamask, but it hasn't appeared!</div>
+        <div class="answer">
+            <p>Log in to Coinbase and verify that you sent to the correct address!</p>
+            <p>During periods of congestion normal transactions may take a long time. Visit
+                <a target="_blank" href="https://etherscan.io/">etherscan.io</a> and enter your
+                transaction id on the top right to track it.
+            </p>
+        </div>
+    </div>
+
+    <div class="question_wrap">
+        <div class="question"><span class="symbol">+</span> 
+            I installed Mist/Parity, but it stopped working or froze my computer!</div>
+        <div class="answer">
+            <p>
+            Mist and Parity download a compressed version of the full blockchain, so make sure you have at least
+            30GB free on your computer. We highly recommend using Metamask instead, because the blockchain download
+            is not required.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

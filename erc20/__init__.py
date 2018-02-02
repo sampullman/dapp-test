@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, url_for, abort
 
-import json
+import json, requests
 
 from response_util import single_error as error
 from eth_util import validate_id
@@ -12,9 +12,24 @@ def make_erc20_blueprint(app):
     blueprint = Blueprint('erc20', __name__, static_folder='static',
                             template_folder='templates', static_url_path='/erc20/static')
 
+
+    # Return value of 1 ETH in USD or None if not available
+    @app.cache.cached(key_prefix='eth_value', timeout=180)
+    def get_eth_value():
+        url = "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&extraParams=ccgtoken"
+        try:
+            response = requests.get(url=url, timeout=3)
+            print(response)
+            data = response.json().get('USD')
+            if data:
+                return int(data)
+        except requests.exceptions.RequestException as e:
+            app.logger.info("Error getting eth "+repr(e))
+        return None
+
     @blueprint.route("/")
     def browser():
-        return render_template("erc20.html")
+        return render_template("erc20.html", eth_value=get_eth_value())
 
     @blueprint.route("/api/balance/", methods=['POST'])
     def api_balance():
