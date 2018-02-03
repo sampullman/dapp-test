@@ -31,6 +31,10 @@ def make_erc20_blueprint(app):
     def browser():
         return render_template("erc20.html", eth_value=get_eth_value())
 
+    @blueprint.route("/getting_started/")
+    def buying_tokens():
+        return render_template("tutorial.html")
+
     @blueprint.route("/api/balance/", methods=['POST'])
     def api_balance():
         account_id = validate_id(request.form.get("id"))

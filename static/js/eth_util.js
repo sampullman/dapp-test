@@ -1,3 +1,6 @@
+
+var testCallback = function(error, result) { console.log(error+" "+result);};
+
 BN = BigNumber.another();
 
 function etherRadio(wei) {
@@ -58,9 +61,9 @@ function readFail(form) {
     }
 }
 
-function make_form(form_id, displayFn) {
-    $(form_id).submit(function(event) {
-        form = $(form_id);
+function make_form(formIdd, displayFn) {
+    $(formIdd).submit(function(event) {
+        form = $(formIdd);
         event.preventDefault();
         $.post(form.attr("action"), form.serialize())
             .done(readSuccess(form, displayFn)).fail(readFail(form));      
@@ -81,5 +84,22 @@ function getWeb3js() {
         console.log("Using metamask");
     } else {
         return new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    }
+}
+
+function setNetwork(netId) {
+    switch(netId) {
+    case 1:
+        $("#network").text("Main network");
+        break;
+    case 3:
+        $("#network").text("Ropsten test network");
+        break;
+    case 8178:
+        $("#network").text("Podo test network");
+        break;
+    default:
+        $("#network").text("Unknown network");
+        break;
     }
 }

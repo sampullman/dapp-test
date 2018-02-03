@@ -64,22 +64,20 @@ $(document).ready(function() {
     //x.substr(2, x.length)
     w3 = getWeb3js();
 
-    w3.version.getNetwork((err, netId) => {
-        switch (netId) {
-        case "1":
-            $("#network").text("Main network");
-            break;
-        case "3":
-            $("#network").text("Ropsten test network");
-            break;
-        case "8178":
-            $("#network").text("Podo test network");
-            break;
-        default:
-            $("#network").text("Unknown network");
-            break;
-        }
-    });
+    if(w3.givenProvider && w3.eth.net) {
+        $(".have_web3").show();
+        $(".no_web3").hide();
+
+        w3.eth.net.getId((err, netId) => {
+            console.log("Got network "+netId);
+            setNetwork(netId);
+        });
+    } else {
+        $(".have_web3").hide();
+        $(".no_web3").show();
+    }
+
+
 
     make_form("#balance", balanceDisplay);
 

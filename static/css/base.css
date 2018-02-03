@@ -76,6 +76,20 @@ body {
     background-color: white;
 }
 
+#title {
+    margin-top: 22px;
+    font-size: 2.4em;
+    font-weight: bold;
+}
+
+.no_web3 {
+    display: none;
+}
+
+.have_web3 {
+    display: block;
+}
+
 form {
     position: relative;
     height: 34px;

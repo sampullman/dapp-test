@@ -8,8 +8,6 @@ var questionHash = null;
 var pendingPollId = null;
 var pending = false;
 
-var testCallback = function(error, result) { console.log(error+" "+result);};
-
 // TOOD get nth-child css working properly instead of 'first' hack
 function makeEvent(event, first) {
     var answer = (event.data.answer == "") ? "We may never know!" : event.data.answer;
@@ -106,22 +104,12 @@ $(document).ready(function() {
     w3 = getWeb3js();
     ContractDef = web3.eth.contract(ContractABI);
     w3.eth.net.getId((err, netId) => {
+
+        setNetwork(netId);
         
-        switch (netId) {
-        case 1:
-            $("#network").text("Main network");
-            break;
-        case 3:
-            $("#network").text("Ropsten test network");
-            break;
-        case 8178:
-            $("#network").text("Podo test network");
+        if(netId == 8178) {
             contract = ContractDef.at(podoTestInfo['contract_hash']);
             console.log(contract);
-            break;
-        default:
-            $("#network").text("Unknown network");
-            break;
         }
         if(contract) {
             contract.tithe((err, result) => {

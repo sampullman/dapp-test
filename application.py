@@ -34,8 +34,8 @@ from magic8ball import make_magic8_blueprint
 
 csrf = CSRFProtect(app)
 
-app.register_blueprint(make_browser_blueprint(app))
-app.register_blueprint(make_erc20_blueprint(app), url_prefix="/erc20")
+app.register_blueprint(make_erc20_blueprint(app))
+app.register_blueprint(make_browser_blueprint(app), url_prefix="/browser")
 app.register_blueprint(make_magic8_blueprint(app), url_prefix="/magic8ball")
 
 application = app

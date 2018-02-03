@@ -11,6 +11,16 @@
 {% block topbar %}<div id="network">No network</div>{% endblock topbar %}
 
 {% block body %}
+<div id="title">Casual Crypto Gaming Token (CCG)</div>
+<div id="subtitle">
+    A token for casual games on the Ethereum blockchain.
+    <div class="no_web3">
+        <a href="/getting_started/">Click here</a> to learn how to purchase ether and tokens.
+    </div>
+    <div class="have_web3">
+        Use the form below to purchase tokens!
+    </div>
+</div>
 <div class="query_block">
     {% if eth_value %}
         <div id="token_price">Current token price: {{ eth_value / 1000 }}</div>
