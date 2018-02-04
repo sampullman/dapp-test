@@ -12,14 +12,23 @@ function etherRadio(wei) {
             .append('<label><input type="radio" name="eth" id="ether" value="ether" checked /><span>Ether</span></label>')
             .append('<label><input type="radio" name="eth" id="wei" value="wei" /><span>Wei</span></label>');
     form.find('input[type=radio][name=eth]').change(function() {
-        var eth = BN(wei).div(BN(1e18)).toNumber();
-        if (this.value == 'ether') {
-            value.html(eth);
-        } else if (this.value == 'wei') {
-            value.html(wei);
-        }
+        setRadioValueHelper(value, this.value, wei);
     });
     return [form, value];
+}
+
+function setRadioValueHelper(valueElement, denomination, wei) {
+    var eth = BN(wei).div(BN(1e18)).toNumber();
+    if (denomination == 'ether') {
+        valueElement.html(eth);
+    } else if (denomination == 'wei') {
+        valueElement.html(wei);
+    }
+}
+
+function setRadioValue(radio, wei) {
+    var denomination = $(radio[0].find('input[name=eth]:checked')).val();
+    setRadioValueHelper(radio[1], denomination, wei);
 }
 
 function row(title, value) {

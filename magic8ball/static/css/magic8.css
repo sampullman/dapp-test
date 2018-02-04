@@ -9,6 +9,10 @@
     position: relative;
     float: left;
     width: 70%;
+    overflow: scroll;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 60px;
 }
 
 #right {

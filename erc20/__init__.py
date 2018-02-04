@@ -1,11 +1,24 @@
 from flask import Blueprint, render_template, redirect, request, url_for, abort
 
-import json, requests
+import json, requests, binascii
 
 from response_util import single_error as error
 from eth_util import validate_id
 
-CONTRACT_ID = '0x16dF1321541Db03Fc2f1AA071ae8f73F1180b774'
+CONTRACT_ID = '0x03F5B34f50a19cc97D64E22C74FCd192bE5Eb8b7'
+
+def get_uint256(web3, contract_id, var_index):
+    loc = '0x{0:0>64}'.format(var_index)
+    return int(binascii.hexlify(web3.eth.getStorageAt(contract_id, loc)), 16)
+
+def get_map_location(map_index, key):
+    key_str = '0x{0:0>64}{1:0>64}'.format(map_index, key)
+    loc = app.web3.sha3(hexstr=key_str)
+    return int(loc, 16)
+
+def get_map_value(web3, contract_id, map_index, key):
+    location = get_map_location(map_index, key)
+    balance = int(web3.eth.getStorageAt(contract_id, location), 16)
 
 def make_erc20_blueprint(app):
 
@@ -29,7 +42,8 @@ def make_erc20_blueprint(app):
 
     @blueprint.route("/")
     def browser():
-        return render_template("erc20.html", eth_value=get_eth_value())
+        token_price = get_uint256(app.web3, CONTRACT_ID, '2')
+        return render_template("erc20.html", eth_value=get_eth_value(), token_price=token_price)
 
     @blueprint.route("/getting_started/")
     def buying_tokens():
@@ -43,10 +57,7 @@ def make_erc20_blueprint(app):
         balances_index = '1'
         if account_id:
             try:
-                key_str = '0x{0:0>64}{1:0>64}'.format(account_id, balances_index)
-                print(key_str)
-                index = app.web3.sha3(hexstr=key_str)
-                balance = int(app.web3.eth.getStorageAt(CONTRACT_ID, int(index, 16)), 16)
+                balance = get_map_value(app.web3, CONTRACT_ID, balances_index, account_id)
 
                 return json.dumps({"id": account_id, "balance": balance})
             except ValueError as ve:

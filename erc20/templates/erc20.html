@@ -11,6 +11,9 @@
 {% block topbar %}<div id="network">No network</div>{% endblock topbar %}
 
 {% block body %}
+<script>
+    var tokenPrice = {{ token_price }};
+</script>
 <div id="title">Casual Crypto Gaming Token (CCG)</div>
 <div id="subtitle">
     A token for casual games on the Ethereum blockchain.
@@ -21,26 +24,18 @@
         Use the form below to purchase tokens!
     </div>
 </div>
-<div class="query_block">
-    {% if eth_value %}
-        <div id="token_price">Current token price: {{ eth_value / 1000 }}</div>
-    {% endif %}
-    <div class="query_title">Check Balance</div>
-    <form id="balance" action="{{ url_for('.api_balance') }}" method="POST">
-        <input type="text" name="id" size="60" placeholder="Your public key" value="0x15581c92DB672cC9316846aEF34DC46Ac95378c2" />
-        <button class="go">GO</button>
-    </form>
-    <div class="read_result">Enter an Ethereum public key to see its Coin balance.</div>
-</div>
-<div class="query_block">
-    <div class="query_title">Send Coins</div>
-    <form id="send" action="{{ url_for('.api_send') }}" method="POST">
-        <input type="text" name="key" size="78" placeholder="Your private key" /><br />
-
-        <input type="text" name="receiver" size="78" placeholder="Destination" value="0xd10fC7768D652Ff3ad666fe952349004c33efF6D" />
-        <input type="number" name="amount" size="20" placeholder="Amount" value="25" />
-        <button class="go">GO</button>
-    </form>
-    <div class="read_result">Send coins to the Destination address. WARNING - this is very insecure and for testing only, do not use an account that holds real Ether</div>
-</div>
+<table id="purchase" cellspacing="0" cellpadding="0">
+    <tr id="quantity_row">
+        <td>Quantity:</td><td><input autocomplete="off" name="quantity" type="number" value="100" /></td>
+    </tr>
+    <tr>
+        <td>Unit:</td>
+        <td id="token_unit"></td>
+    </tr>
+    <tr>
+        <td>Price:</td>
+        <td id="token_price"></td>
+    </tr>
+    <tr><td colspan="2" id="buy_cell"><button id="buy_button">PURCHASE</button></td></tr>
+</table>
 {% endblock body %}

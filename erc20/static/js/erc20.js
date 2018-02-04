@@ -1,6 +1,8 @@
 w3 = new Web3();
 Buffer = ethereumjs.Buffer.Buffer;
 
+var priceRadio = null;
+
 function balanceDisplay(info) {
     console.log(info);
     return $('<table>').append(row("Coins", info.balance));
@@ -59,6 +61,16 @@ function sendTransaction(info) {
     }
 }
 
+function updatePrice() {
+    var quantity = $("#purchase input[name=quantity]").val();
+    if(quantity == "") {
+        quantity = 0;
+    } else {
+        quantity = parseInt(quantity);
+    }
+    setRadioValue(priceRadio, quantity * tokenPrice);
+}
+
 $(document).ready(function() {
 
     //x.substr(2, x.length)
@@ -77,7 +89,13 @@ $(document).ready(function() {
         $(".no_web3").show();
     }
 
-
+    priceRadio = etherRadio(tokenPrice);
+    $("#token_unit").append(priceRadio[0]);
+    $("#token_price").append(priceRadio[1]);
+    $("#purchase input[name=quantity]").on('input', function() {
+        updatePrice();
+    });
+    updatePrice();
 
     make_form("#balance", balanceDisplay);
 
