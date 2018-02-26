@@ -1,6 +1,26 @@
 w3 = new Web3();
 
+//const ContractABI = ;
+var contract = null;
+
 var priceRadio = null;
+
+function askQuestion(account, quantity) {
+    //console.log("Purchasing tokens: "+)
+    
+    contract.askQuestion(question, {
+        gas: 120000,
+        from: account,
+        value: tithe
+    }, (err, result) => {
+        if(err) {
+            $(".read_result").text("Error! The Magic 8 Ball did not receive your request!");
+        } else {
+            questionAsked(result);
+        }
+        console.log("Question result: "+err+" "+result);
+    });
+}
 
 function updatePrice() {
     var quantity = $("#purchase input[name=quantity]").val();
