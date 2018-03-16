@@ -86,6 +86,10 @@ function strip_hex(hex_str) {
     return hex_str;
 }
 
+function usdToWei(usd, eth_value) {
+    return (usd / eth_value) * 1e18;
+}
+
 function getWeb3js() {
     if (typeof web3 !== 'undefined') {
         // Use Mist/MetaMask's provider

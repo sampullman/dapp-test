@@ -13,6 +13,7 @@ flask-sqlalchemy = "*"
 eth-utils = "*"
 "web3" = "==4.0.0b6"
 flask-cache = "*"
+uwsgi = "*"
 
 
 [dev-packages]

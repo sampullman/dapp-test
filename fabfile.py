@@ -1,4 +1,5 @@
-from fabric.api import env, run, cd, put, get, hide, settings, sudo
+from fabric.api import env, run, put, get, hide, settings, sudo
+from fabric.context_managers import cd
 from fabric.operations import local
 from time import gmtime, strftime
 import os
@@ -35,7 +36,7 @@ def deploy(config):
         local('rsync -az --force --delete --progress --exclude-from=rsync_exclude.txt -e "ssh -p22" ./ {}:{}'.format(config.HOST, config.FOLDER))
         run('mkdir -p flask_cache')
         run('rm '+config.DB)
-        run('source '+config.VENV+' && python maintain.py')
+        run('pipenv run python maintain.py')
         sudo('service dapp-test restart')
 
 def setup(host, password):
